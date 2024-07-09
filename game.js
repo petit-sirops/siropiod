@@ -22,7 +22,7 @@ const platforms = [
     { x: 0, y: 750, width: 300, height: 20 },
     { x: 350, y: 850, width: 250, height: 20 },
     { x: 650, y: 950, width: 300, height: 20 },
-    { x: 1000, y: 1050, width: 300, height: 20 },
+    { x: 1000, y: 1150, width: 300, height: 20 },
     
     // Floating platforms
     { x: 50, y: 650, width: 150, height: 20 },
