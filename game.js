@@ -133,7 +133,7 @@ function drawYellowBlocks() {
     });
 }
 
-function playRandomMusic() {
+/*function playRandomMusic() {
     if (musicSources.length > 0) {
         const randomIndex = Math.floor(Math.random() * musicSources.length);
         audioPlayer.src = musicSources[randomIndex];
@@ -141,7 +141,7 @@ function playRandomMusic() {
     } else {
         console.warn('No music sources available.');
     }
-}
+}*/
 
 function checkCollisions() {
     player.grounded = false;
@@ -208,7 +208,7 @@ function checkCollisions() {
             player.y < block.y + block.height &&
             player.y + player.height > block.y) {
             // Play random music and remove block
-            playRandomMusic();
+            //playRandomMusic();
             yellowBlocks.splice(i, 1);
         }
     }
