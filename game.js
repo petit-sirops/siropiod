@@ -22,6 +22,7 @@ const platforms = [
     { x: 350, y: 850, width: 250, height: 20 },
     { x: 650, y: 950, width: 300, height: 20 },
     { x: 1000, y: 1050, width: 300, height: 20 },
+    { x: 1300, y: 1250, width: 300, height: 20 },
     { x: 50, y: 650, width: 150, height: 20 },
     { x: 250, y: 550, width: 100, height: 20 },
     { x: 400, y: 450, width: 200, height: 20 },
