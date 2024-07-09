@@ -12,7 +12,7 @@ const player = {
     speed: 5,
     velocityY: 0,
     velocityX: 0,
-    jumpPower: 20,
+    jumpPower: 15,
     grounded: false
 };
 
@@ -64,7 +64,41 @@ const yellowBlocks = [
 ];
 
 const audioPlayer = document.getElementById('audio-player');
-const musicSources = ['music1.mp3', 'music2.mp3', 'music3.mp3'];
+const musicList = document.getElementById('music-list');
+let musicSources = [];
+
+const repoOwner = 'petit-sirops'; // Replace with your GitHub username
+const repoName = 'siropiod'; // Replace with your repository name
+const directory = 'music';
+
+async function fetchMusicFiles() {
+    const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${directory}`;
+    try {
+        const response = await fetch(apiUrl);
+        const files = await response.json();
+
+        files.forEach(file => {
+            if (file.name.endsWith('.mp3')) {
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = file.download_url;
+                link.textContent = file.name;
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    audioPlayer.src = file.download_url;
+                    audioPlayer.play();
+                });
+                listItem.appendChild(link);
+                musicList.appendChild(listItem);
+                musicSources.push(file.download_url);
+            }
+        });
+    } catch (error) {
+        console.error('Error fetching music files:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', fetchMusicFiles);
 
 const camera = {
     x: 0,
@@ -100,9 +134,13 @@ function drawYellowBlocks() {
 }
 
 function playRandomMusic() {
-    const randomIndex = Math.floor(Math.random() * musicSources.length);
-    audioPlayer.src = musicSources[randomIndex];
-    audioPlayer.play();
+    if (musicSources.length > 0) {
+        const randomIndex = Math.floor(Math.random() * musicSources.length);
+        audioPlayer.src = musicSources[randomIndex];
+        audioPlayer.play();
+    } else {
+        console.warn('No music sources available.');
+    }
 }
 
 function checkCollisions() {
@@ -170,7 +208,7 @@ function checkCollisions() {
             player.y < block.y + block.height &&
             player.y + player.height > block.y) {
             // Play random music and remove block
-            //playRandomMusic();
+            playRandomMusic();
             yellowBlocks.splice(i, 1);
         }
     }
