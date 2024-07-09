@@ -3,26 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random MP3 Player</title>
-    <script src="files.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function getRandomFile() {
-                const randomIndex = Math.floor(Math.random() * files.length);
-                return files[randomIndex];
-            }
-
-            const audioPlayer = document.getElementById('audioPlayer');
-            const randomFile = getRandomFile();
-            audioPlayer.src = randomFile;
-            audioPlayer.play();
-        });
-    </script>
+    <title>Music Player</title>
 </head>
 <body>
-    <h1>Random MP3 Player</h1>
-    <audio id="audioPlayer" controls>
-        Your browser does not support the audio element.
-    </audio>
+    <h1>Music Player</h1>
+    <div id="music-player">
+        <audio controls id="audio-player">
+            Your browser does not support the audio element.
+        </audio>
+        <ul id="music-list"></ul>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
