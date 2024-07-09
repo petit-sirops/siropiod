@@ -55,6 +55,14 @@ const canvas = document.getElementById('gameCanvas');
             { x: 3200, y: 300, width: 50, height: 50 }
         ];
 
+        const yellowBlocks = [
+            { x: 500, y: 750, width: 50, height: 50 },
+            { x: 900, y: 850, width: 50, height: 50 },
+            { x: 1400, y: 450, width: 50, height: 50 },
+            { x: 2300, y: 550, width: 50, height: 50 },
+            { x: 3100, y: 250, width: 50, height: 50 }
+        ];
+
         const camera = {
             x: 0,
             y: 0,
@@ -77,6 +85,13 @@ const canvas = document.getElementById('gameCanvas');
         function drawRedBlocks() {
             ctx.fillStyle = 'red';
             redBlocks.forEach(block => {
+                ctx.fillRect(block.x - camera.x, block.y, block.width, block.height);
+            });
+        }
+
+        function drawYellowBlocks() {
+            ctx.fillStyle = 'yellow';
+            yellowBlocks.forEach(block => {
                 ctx.fillRect(block.x - camera.x, block.y, block.width, block.height);
             });
         }
@@ -137,6 +152,20 @@ const canvas = document.getElementById('gameCanvas');
                     camera.x = 0; // Reset camera position
                 }
             });
+
+                // Check for collision with yellow blocks
+            for (let i = yellowBlocks.length - 1; i >= 0; i--) {
+                const block = yellowBlocks[i];
+                if (player.x < block.x + block.width &&
+                    player.x + player.width > block.x &&
+                    player.y < block.y + block.height &&
+                    player.y + player.height > block.y) {
+                    // Play random music and remove block
+                    playRandomMusic();
+                    yellowBlocks.splice(i, 1);
+                }
+            }
+
 
             if (player.y + player.height > canvas.height) {
                 player.y = canvas.height - player.height;
