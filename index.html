@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Local MP3 Player</title>
+    <title>Random MP3 Player</title>
+    <script src="files.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function getRandomFile() {
+                const randomIndex = Math.floor(Math.random() * files.length);
+                return files[randomIndex];
+            }
+
+            const audioPlayer = document.getElementById('audioPlayer');
+            const randomFile = getRandomFile();
+            audioPlayer.src = randomFile;
+            audioPlayer.play();
+        });
+    </script>
 </head>
 <body>
-    <h1>Local MP3 Player</h1>
-    <input type="file" id="fileInput" accept="audio/mp3" />
+    <h1>Random MP3 Player</h1>
     <audio id="audioPlayer" controls>
         Your browser does not support the audio element.
     </audio>
-
-    <script>
-        document.getElementById('fileInput').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const audioPlayer = document.getElementById('audioPlayer');
-                const objectURL = URL.createObjectURL(file);
-                audioPlayer.src = objectURL;
-                audioPlayer.play();
-            }
-        });
-    </script>
 </body>
 </html>
