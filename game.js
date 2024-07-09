@@ -18,13 +18,10 @@ const player = {
 
 const gravity = 0.5;
 const platforms = [
-    // Ground platforms
     { x: 0, y: 750, width: 300, height: 20 },
     { x: 350, y: 850, width: 250, height: 20 },
     { x: 650, y: 950, width: 300, height: 20 },
     { x: 1000, y: 1050, width: 300, height: 20 },
-    
-    // Floating platforms
     { x: 50, y: 650, width: 150, height: 20 },
     { x: 250, y: 550, width: 100, height: 20 },
     { x: 400, y: 450, width: 200, height: 20 },
@@ -64,7 +61,7 @@ const yellowBlocks = [
 ];
 
 const audioPlayer = document.getElementById('audio-player');
-const musicSources = ['music/pipepic.mp3', 'music/troll..mp3', 'music/lasagne..mp3'];
+const musicSources = ['music/pipepic.mp3', 'music/troll.mp3', 'music/lasagne.mp3'];
 
 const camera = {
     x: 0,
@@ -103,13 +100,13 @@ function playRandomMusic() {
     const randomIndex = Math.floor(Math.random() * musicSources.length);
     audioPlayer.src = musicSources[randomIndex];
     audioPlayer.play();
+    console.log(`Playing: ${audioPlayer.src}`);
 }
 
 function checkCollisions() {
     player.grounded = false;
 
     platforms.forEach(platform => {
-        // Check for collision from above
         if (player.x < platform.x + platform.width &&
             player.x + player.width > platform.x &&
             player.y + player.height > platform.y &&
@@ -119,7 +116,6 @@ function checkCollisions() {
             player.y = platform.y - player.height;
         }
 
-        // Check for collision from below
         if (player.x < platform.x + platform.width &&
             player.x + player.width > platform.x &&
             player.y >= platform.y + platform.height &&
@@ -128,7 +124,6 @@ function checkCollisions() {
             player.y = platform.y + platform.height;
         }
 
-        // Check for collision from the left
         if (player.x + player.width + player.velocityX > platform.x &&
             player.x + player.velocityX < platform.x &&
             player.y < platform.y + platform.height &&
@@ -137,7 +132,6 @@ function checkCollisions() {
             player.x = platform.x - player.width;
         }
 
-        // Check for collision from the right
         if (player.x + player.velocityX < platform.x + platform.width &&
             player.x + player.width + player.velocityX > platform.x + platform.width &&
             player.y < platform.y + platform.height &&
@@ -147,31 +141,29 @@ function checkCollisions() {
         }
     });
 
-    // Check for collision with red blocks
     redBlocks.forEach(block => {
         if (player.x < block.x + block.width &&
             player.x + player.width > block.x &&
             player.y < block.y + block.height &&
             player.y + player.height > block.y) {
-            // Reset player to the starting position
             player.x = 100;
             player.y = canvas.height - 150;
             player.velocityX = 0;
             player.velocityY = 0;
-            camera.x = 0; // Reset camera position
+            camera.x = 0;
+            console.log("Player reset due to red block collision.");
         }
     });
 
-    // Check for collision with yellow blocks
     for (let i = yellowBlocks.length - 1; i >= 0; i--) {
         const block = yellowBlocks[i];
         if (player.x < block.x + block.width &&
             player.x + player.width > block.x &&
             player.y < block.y + block.height &&
             player.y + player.height > block.y) {
-            // Play random music and remove block
             playRandomMusic();
             yellowBlocks.splice(i, 1);
+            console.log("Yellow block collected and music played.");
         }
     }
 
@@ -202,12 +194,11 @@ function handlePlayerMovement() {
 
     checkCollisions();
 
-    // Update camera position
     camera.x = player.x - canvas.width / 2 + player.width / 2;
     if (camera.x < 0) {
         camera.x = 0;
     }
-    if (camera.x + camera.width > 4500) { // Assuming world width is 4500
+    if (camera.x + camera.width > 4500) {
         camera.x = 4500 - camera.width;
     }
 }
