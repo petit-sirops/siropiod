@@ -154,7 +154,7 @@ const canvas = document.getElementById('gameCanvas');
             });
 
                 // Check for collision with yellow blocks
-            for (let i = yellowBlocks.length - 1; i >= 0; i--) {
+            /*for (let i = yellowBlocks.length - 1; i >= 0; i--) {
                 const block = yellowBlocks[i];
                 if (player.x < block.x + block.width &&
                     player.x + player.width > block.x &&
@@ -164,7 +164,7 @@ const canvas = document.getElementById('gameCanvas');
                     playRandomMusic();
                     yellowBlocks.splice(i, 1);
                 }
-            }
+            }*/
 
 
             if (player.y + player.height > canvas.height) {
