@@ -3,17 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Player</title>
+    <title>Platformer Game with Music Player</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; }
+        #gameCanvas { display: block; }
+        #music-player { position: absolute; top: 20px; left: 20px; background: rgba(255, 255, 255, 0.8); padding: 10px; border-radius: 10px; }
+        h1 { margin-bottom: 10px; }
+    </style>
 </head>
 <body>
-    <h1>Music Player</h1>
+    <h1>Platformer Game with Music Player</h1>
     <div id="music-player">
         <audio controls id="audio-player">
             Your browser does not support the audio element.
         </audio>
         <ul id="music-list"></ul>
     </div>
+    <canvas id="gameCanvas"></canvas>
 
     <script src="script.js"></script>
+    <script src="game.js"></script>
 </body>
 </html>
