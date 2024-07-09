@@ -1,6 +1,6 @@
-const repoOwner = 'your-username'; // Replace with your GitHub username
-const repoName = 'your-repo'; // Replace with your repository name
-const directory = 'Music';
+const repoOwner = 'petit-sirops'; // Replace with your GitHub username
+const repoName = 'siropiod'; // Replace with your repository name
+const directory = 'music';
 
 const musicList = document.getElementById('music-list');
 const audioPlayer = document.getElementById('audio-player');
