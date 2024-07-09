@@ -170,7 +170,7 @@ function checkCollisions() {
             player.y < block.y + block.height &&
             player.y + player.height > block.y) {
             // Play random music and remove block
-            playRandomMusic();
+            //playRandomMusic();
             yellowBlocks.splice(i, 1);
         }
     }
